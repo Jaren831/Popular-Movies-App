@@ -34,4 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container, settingsFragment).commit();
         return true;
     }
+    @Override
+    public void onBackPressed() {
+        if(getFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        }
+        else {
+            getFragmentManager().popBackStack();
+        }
+    }
 }
