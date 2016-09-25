@@ -107,7 +107,7 @@ public class MovieQuery {
 
     private static List<Movie> extractMovies(String movieJSON) {
 
-        String imageUrl = "http://image.tmdb.org/t/p/w45";
+        String imageUrl = "http://image.tmdb.org/t/p/w150";
 
         if (TextUtils.isEmpty(movieJSON)) {
             return null;
@@ -127,9 +127,8 @@ public class MovieQuery {
                 String moviePlot = currentMovie.optString("overview");
                 String movieImage = currentMovie.optString("poster_path");
                 movieImage = movieImage.replace("\\", "");
-                imageUrl = imageUrl + movieImage;
 
-                movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl), moviePlot, movieRating, releaseDate));
+                movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating, releaseDate));
             }
         } catch (JSONException e) {
             Log.e("MovieQuery", "Problem parsing the movie json results", e);

@@ -8,6 +8,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
 
+
 /**
  * Created by Jaren Lynch on 9/23/2016.
  */
@@ -18,6 +19,7 @@ public class SettingsFragment extends PreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+        setHasOptionsMenu(true);
 
         Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
         bindPreferenceSummaryToValue(orderBy);
