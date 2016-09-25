@@ -18,29 +18,24 @@ public class MainActivity extends AppCompatActivity {
 
             GridFragment movieGridFragment = new GridFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, movieGridFragment).commit();
+                    .add(R.id.fragment_container, movieGridFragment)
+                    .addToBackStack(null)
+                    .commit();
         }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         SettingsFragment settingsFragment = new SettingsFragment();
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, settingsFragment).commit();
-        return true;
-    }
-    @Override
-    public void onBackPressed() {
-        if(getFragmentManager().getBackStackEntryCount() == 0) {
-            super.onBackPressed();
-        }
-        else {
-            getFragmentManager().popBackStack();
-        }
+                .replace(R.id.fragment_container, settingsFragment)
+                .addToBackStack(null)
+                .commit();
+        return super.onOptionsItemSelected(item);
     }
 }

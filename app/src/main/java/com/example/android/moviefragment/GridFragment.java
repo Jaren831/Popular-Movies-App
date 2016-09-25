@@ -41,4 +41,14 @@ public class GridFragment extends Fragment {
         });
         return rootView;
     }
+//    @Override
+//    public void onStop() {
+//        getActivity().setTitle(R.string.settings);
+//        super.onStop();
+//    }
+//    @Override
+//    public void onResume() {
+//        getActivity().setTitle(R.string.app_name);
+//        super.onResume();
+//    }
 }
