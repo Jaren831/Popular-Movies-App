@@ -1,5 +1,7 @@
 package com.example.android.moviefragment;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Jaren Lynch on 9/23/2016.
  */
@@ -7,7 +9,7 @@ package com.example.android.moviefragment;
 public class Movie {
     private String mTitle;
 
-    private byte[] mImage;
+    private Bitmap mImage;
 
     private String mPlot;
 
@@ -15,7 +17,7 @@ public class Movie {
 
     private String mDate;
 
-    public Movie(String title, byte[] image, String plot, int rating, String date) {
+    public Movie(String title, Bitmap image, String plot, int rating, String date) {
         mTitle = title;
         mImage = image;
         mPlot = plot;
@@ -27,7 +29,7 @@ public class Movie {
         return mTitle;
     }
 
-    public byte[] getImage() {
+    public Bitmap getImage() {
         return mImage;
     }
 

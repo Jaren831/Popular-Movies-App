@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">MovieFragment</string>
+    <string name="app_name">PopularMovies</string>
     <string name="settings">Settings</string>
     <string name="order_by_dialog_title">Select</string>
+    <string name="empty">No movies found</string>
+    <string name="noInternet">No internet connection</string>
+
+
 
     <string name="settings_order_by_title">Order By</string>
     <string name="settings_order_by_key">order_by</string>

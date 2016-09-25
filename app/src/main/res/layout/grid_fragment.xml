@@ -9,7 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EFWFWWEFWF"/>
+        android:textSize="20sp"
+        android:textAppearance="?android:textAppearanceMedium" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"/>
 </FrameLayout>
