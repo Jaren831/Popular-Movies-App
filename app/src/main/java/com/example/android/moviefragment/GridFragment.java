@@ -99,7 +99,7 @@ public class GridFragment extends Fragment
 
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
-        return new MovieLoader(this, uriBuilder.toString());
+        return new MovieLoader(this.getContext(), uriBuilder.toString());
     }
 
     @Override
