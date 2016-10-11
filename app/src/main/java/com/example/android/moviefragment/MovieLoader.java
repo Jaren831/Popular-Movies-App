@@ -26,6 +26,7 @@ public class MovieLoader extends AsyncTaskLoader<List<Movie>> {
     protected void onStartLoading() {
         Log.i(LOG_TAG, "TEST: Main Activity onStartLoading() called");
 
+
         forceLoad();
     }
 

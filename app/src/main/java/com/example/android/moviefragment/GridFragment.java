@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,10 +97,11 @@ public class GridFragment extends Fragment
 
         Uri baseUri = Uri.parse(MOVIE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendQueryParameter("sort_by", orderBy);
+        Log.i(LOG_TAG, uriBuilder.toString());
 
-        uriBuilder.appendQueryParameter("orderby", orderBy);
 
-        return new MovieLoader(this.getContext(), uriBuilder.toString());
+        return new MovieLoader(this.getContext(), baseUri.toString());
     }
 
     @Override
@@ -118,10 +120,15 @@ public class GridFragment extends Fragment
         }
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(2, null, this);
+    }
 
     @Override
     public void onLoaderReset(Loader<List<Movie>> loader) {
         movieAdapter.clear();
-
     }
 }

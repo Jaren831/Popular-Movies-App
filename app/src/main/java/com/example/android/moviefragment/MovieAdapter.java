@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,7 +31,11 @@ class MovieAdapter extends ArrayAdapter<Movie> {
         Movie currentMovie = getItem(position);
 
         ImageView movieImage = (ImageView) gridItemView.findViewById(movie_image);
-        movieImage.setImageBitmap(currentMovie.getImage());
+        if (currentMovie.getImage() != null) {
+            movieImage.setImageBitmap(currentMovie.getImage());
+        } else {
+            movieImage.setImageResource(R.drawable.ic_help_outline_black_24dp);
+        }
 
         TextView movie_text = (TextView) gridItemView.findViewById(R.id.movie_title);
         movie_text.setText(currentMovie.getTitle());
