@@ -16,8 +16,8 @@ import static com.example.android.moviefragment.R.id.movie_image;
  * Created by Jaren Lynch on 9/20/2016.
  */
 
-class MovieAdapter extends ArrayAdapter<Movie> {
-    public MovieAdapter(Context context, ArrayList<Movie> movies) {
+class GridAdapter extends ArrayAdapter<Movie> {
+    public GridAdapter(Context context, ArrayList<Movie> movies) {
         super(context, 0, movies);
     }
 

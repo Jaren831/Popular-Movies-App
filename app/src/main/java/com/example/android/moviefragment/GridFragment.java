@@ -29,7 +29,7 @@ import java.util.List;
 
 public class GridFragment extends Fragment
         implements android.support.v4.app.LoaderManager.LoaderCallbacks<List<Movie>> {
-    MovieAdapter movieAdapter;
+    GridAdapter gridAdapter;
     GridView gridView;
     TextView emptyView;
     ProgressBar mProgressBar;
@@ -42,13 +42,13 @@ public class GridFragment extends Fragment
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.grid_fragment, container, false);
         gridView = (GridView) rootView.findViewById(R.id.movie_grid);
-        movieAdapter = new MovieAdapter(getActivity(), new ArrayList<Movie>());
+        gridAdapter = new GridAdapter(getActivity(), new ArrayList<Movie>());
         emptyView = (TextView) rootView.findViewById(R.id.empty);
         mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         android.support.v4.app.LoaderManager loaderManager = getLoaderManager();
 
 
-        gridView.setAdapter(movieAdapter);
+        gridView.setAdapter(gridAdapter);
 
         while (gridView == null) {
             mProgressBar.setVisibility(View.VISIBLE);
@@ -63,7 +63,6 @@ public class GridFragment extends Fragment
 
         if (isConnected) {
             loaderManager.initLoader(MOVIE_LOADER_ID, null, this);
-            Log.i(LOG_TAG, "TEST: Main Activity initLoader() called");
         } else {
             mProgressBar.setVisibility(View.GONE);
             emptyView.setText(R.string.noInternet);
@@ -97,26 +96,26 @@ public class GridFragment extends Fragment
 
         Uri baseUri = Uri.parse(MOVIE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
+
         uriBuilder.appendQueryParameter("sort_by", orderBy);
         Log.i(LOG_TAG, uriBuilder.toString());
 
 
-        return new MovieLoader(this.getContext(), baseUri.toString());
+        return new MovieLoader(this.getContext(), uriBuilder.toString());
     }
 
     @Override
     public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movies) {
         emptyView.setText(R.string.empty);
         // Clear the adapter of previous earthquake data
-        movieAdapter.clear();
-        Log.i(LOG_TAG, "TEST: Main Activity onLoadFinished() called");
+        gridAdapter.clear();
         mProgressBar.setVisibility(View.GONE);
 
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
 
         if (movies != null && !movies.isEmpty()) {
-            movieAdapter.addAll(movies);
+            gridAdapter.addAll(movies);
         }
 
     }
@@ -129,6 +128,6 @@ public class GridFragment extends Fragment
 
     @Override
     public void onLoaderReset(Loader<List<Movie>> loader) {
-        movieAdapter.clear();
+        gridAdapter.clear();
     }
 }
