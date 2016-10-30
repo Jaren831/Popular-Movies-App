@@ -46,7 +46,8 @@ class DetailAdapter extends ArrayAdapter<Movie> {
         TextView detailRating = (TextView) detailView.findViewById(R.id.detail_rating);
         detailRating.setText(currentMovie.getRating());
 
-        TextView detailPopularity = (TextView) detailView.findViewById(R.id.detail_popularity);
+        TextView detailDate = (TextView) detailView.findViewById(R.id.detail_date);
+        detailDate.setText(currentMovie.getDate());
 
         return detailView;
     }
