@@ -7,15 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 /**
  * Created by Jaren Lynch on 9/23/2016.
  */
 
 public class DetailFragment extends Fragment {
-    TextView current;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -23,22 +19,22 @@ public class DetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.detail_fragment, container, false);
 
         Bundle bundle = this.getArguments();
-        int position = bundle.getParcelable("selectedMovie");
+        Movie currentMovie = bundle.getParcelable("selectedMovie");
 
-        List<Movie> movies position;
 
-//
-//        TextView detailText = (TextView) detailView.findViewById(R.id.detail_title);
-//        detailText.setText(currentMovie.getTitle());
-//
-//        TextView detailPlot = (TextView) detailView.findViewById(R.id.detail_plot);
-//        detailPlot.setText(currentMovie.getPlot());
-//
-//        TextView detailRating = (TextView) detailView.findViewById(R.id.detail_rating);
-//        detailRating.setText(currentMovie.getRating());
-//
-//        TextView detailPopularity = (TextView) detailView.findViewById(R.id.detail_date);
-//        detailDate.setText(currentMovie.getRating());
+
+
+        TextView detailText = (TextView) rootView.findViewById(R.id.detail_title);
+        detailText.setText(currentMovie.getTitle());
+
+        TextView detailPlot = (TextView) rootView.findViewById(R.id.detail_plot);
+        detailPlot.setText(currentMovie.getPlot());
+
+        TextView detailRating = (TextView) rootView.findViewById(R.id.detail_rating);
+        detailRating.setText(currentMovie.getRating());
+
+        TextView detailDate = (TextView) rootView.findViewById(R.id.detail_date);
+        detailDate.setText(currentMovie.getRating());
 
         
         

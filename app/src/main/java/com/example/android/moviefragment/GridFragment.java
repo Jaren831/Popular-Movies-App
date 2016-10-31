@@ -76,7 +76,9 @@ public class GridFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 DetailFragment detailFragment = new DetailFragment();
                 Bundle args = new Bundle();
-                args.putParcelable("selectedMovie", Movie(movies));
+                Movie currentMovie = (Movie) parent.getAdapter().getItem(position);
+                Toast.makeText(getActivity(),currentMovie.getTitle(), Toast.LENGTH_LONG).show();
+                args.putParcelable("selectedMovie", currentMovie);
                 detailFragment.setArguments(args);
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
