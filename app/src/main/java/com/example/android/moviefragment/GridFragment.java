@@ -123,7 +123,9 @@ public class GridFragment extends Fragment
     public void onResume() {
         super.onResume();
         LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(2, null, this);
+        loaderManager.restartLoader(1, null, this);
+        mProgressBar.setVisibility(View.VISIBLE);
+
     }
 
     @Override
