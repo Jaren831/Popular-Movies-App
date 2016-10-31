@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * Created by Jaren Lynch on 9/23/2016.
  */
@@ -19,10 +21,12 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         
         View rootView = inflater.inflate(R.layout.detail_fragment, container, false);
-//        Bundle bundle = this.getArguments();
-//        int position = bundle.getInt("position");
-//        current = (TextView) rootView.findViewById(R.id.uh_what);
-//        current.setText(Integer.toString(position));
+
+        Bundle bundle = this.getArguments();
+        int position = bundle.getParcelable("selectedMovie");
+
+        List<Movie> movies position;
+
 //
 //        TextView detailText = (TextView) detailView.findViewById(R.id.detail_title);
 //        detailText.setText(currentMovie.getTitle());
