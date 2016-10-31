@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +126,8 @@ public class GridFragment extends Fragment
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.restartLoader(1, null, this);
         mProgressBar.setVisibility(View.VISIBLE);
-
+        Toast updateToast = Toast.makeText(getActivity(), "Hold on, Updating...", Toast.LENGTH_LONG);
+        updateToast.show();
     }
 
     @Override
