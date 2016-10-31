@@ -77,10 +77,8 @@ public class GridFragment extends Fragment
                 DetailFragment detailFragment = new DetailFragment();
                 Bundle args = new Bundle();
                 Movie currentMovie = (Movie) parent.getAdapter().getItem(position);
-                Toast.makeText(getActivity(),currentMovie.getTitle(), Toast.LENGTH_LONG).show();
                 args.putParcelable("selectedMovie", currentMovie);
                 detailFragment.setArguments(args);
-
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, detailFragment);
                 transaction.addToBackStack(null);

@@ -5,7 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import static com.example.android.moviefragment.R.id.detail_image;
 
 /**
  * Created by Jaren Lynch on 9/23/2016.
@@ -22,7 +25,12 @@ public class DetailFragment extends Fragment {
         Movie currentMovie = bundle.getParcelable("selectedMovie");
 
 
-
+        ImageView movieImage = (ImageView) rootView.findViewById(detail_image);
+        if (currentMovie.getImage() != null) {
+            movieImage.setImageBitmap(currentMovie.getImage());
+        } else {
+            movieImage.setImageResource(R.drawable.ic_help_outline_black_24dp);
+        }
 
         TextView detailText = (TextView) rootView.findViewById(R.id.detail_title);
         detailText.setText(currentMovie.getTitle());
@@ -31,13 +39,11 @@ public class DetailFragment extends Fragment {
         detailPlot.setText(currentMovie.getPlot());
 
         TextView detailRating = (TextView) rootView.findViewById(R.id.detail_rating);
-        detailRating.setText(currentMovie.getRating());
+        detailRating.setText(Integer.toString(currentMovie.getRating()) + " / 10");
 
         TextView detailDate = (TextView) rootView.findViewById(R.id.detail_date);
-        detailDate.setText(currentMovie.getRating());
+        detailDate.setText(currentMovie.getDate());
 
-        
-        
         return rootView;
 
     }
