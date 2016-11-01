@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
             GridFragment movieGridFragment = new GridFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, movieGridFragment)
-                    .addToBackStack(null)
                     .commit();
         }
     }

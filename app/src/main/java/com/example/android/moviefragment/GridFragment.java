@@ -36,7 +36,14 @@ public class GridFragment extends Fragment
     ProgressBar mProgressBar;
     private static final int MOVIE_LOADER_ID = 1;
     public static final String LOG_TAG = MovieQuery.class.getSimpleName();
-    public static final String MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?api_key=42e95964a6932d7d9b7d25f1c0c70c01";
+    public static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
+    public static final String API_KEY = "42e95964a6932d7d9b7d25f1c0c70c01";
+    SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            settingsReload();
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +54,8 @@ public class GridFragment extends Fragment
         emptyView = (TextView) rootView.findViewById(R.id.empty);
         mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         android.support.v4.app.LoaderManager loaderManager = getLoaderManager();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        preferences.registerOnSharedPreferenceChangeListener(listener);
 
 
         gridView.setAdapter(gridAdapter);
@@ -98,7 +107,8 @@ public class GridFragment extends Fragment
         Uri baseUri = Uri.parse(MOVIE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("sort_by", orderBy);
+        uriBuilder.appendPath(orderBy);
+        uriBuilder.appendQueryParameter("api_key", API_KEY);
         Log.i(LOG_TAG, uriBuilder.toString());
 
 
@@ -120,18 +130,16 @@ public class GridFragment extends Fragment
         }
 
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.restartLoader(1, null, this);
-        mProgressBar.setVisibility(View.VISIBLE);
-        Toast updateToast = Toast.makeText(getActivity(), "Hold on, Updating...", Toast.LENGTH_LONG);
-        updateToast.show();
-    }
 
     @Override
     public void onLoaderReset(Loader<List<Movie>> loader) {
         gridAdapter.clear();
+    }
+    public void settingsReload() {
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.restartLoader(1, null, this);
+        mProgressBar.setVisibility(View.VISIBLE);
+        Toast updateToast = Toast.makeText(getActivity(), "Settings Saved", Toast.LENGTH_SHORT);
+        updateToast.show();
     }
 }
