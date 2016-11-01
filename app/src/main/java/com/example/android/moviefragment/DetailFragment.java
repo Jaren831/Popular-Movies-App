@@ -36,6 +36,7 @@ public class DetailFragment extends Fragment {
         detailText.setText(currentMovie.getTitle());
 
         TextView detailPlot = (TextView) rootView.findViewById(R.id.detail_plot);
+        detailPlot.setSelected(true);
         detailPlot.setText(currentMovie.getPlot());
 
         TextView detailRating = (TextView) rootView.findViewById(R.id.detail_rating);

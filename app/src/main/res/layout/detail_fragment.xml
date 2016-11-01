@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="fill_parent">
             <TextView
                 android:id="@+id/detail_title"
                 android:layout_width="match_parent"
@@ -33,6 +33,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:gravity="start"
+                android:ellipsize="marquee"
+                android:singleLine="true"
                 android:scrollHorizontally="true"/>
             <LinearLayout
                 android:layout_width="match_parent"
