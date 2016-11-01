@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ public class GridFragment extends Fragment
     TextView emptyView;
     ProgressBar mProgressBar;
     private static final int MOVIE_LOADER_ID = 1;
-    public static final String LOG_TAG = MovieQuery.class.getSimpleName();
     public static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
     public static final String API_KEY = "42e95964a6932d7d9b7d25f1c0c70c01";
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -56,7 +54,6 @@ public class GridFragment extends Fragment
         android.support.v4.app.LoaderManager loaderManager = getLoaderManager();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         preferences.registerOnSharedPreferenceChangeListener(listener);
-
 
         gridView.setAdapter(gridAdapter);
 
@@ -106,24 +103,16 @@ public class GridFragment extends Fragment
 
         Uri baseUri = Uri.parse(MOVIE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-
         uriBuilder.appendPath(orderBy);
         uriBuilder.appendQueryParameter("api_key", API_KEY);
-        Log.i(LOG_TAG, uriBuilder.toString());
-
-
         return new MovieLoader(this.getContext(), uriBuilder.toString());
     }
 
     @Override
     public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movies) {
         emptyView.setText(R.string.empty);
-        // Clear the adapter of previous earthquake data
         gridAdapter.clear();
         mProgressBar.setVisibility(View.GONE);
-
-        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
-        // data set. This will trigger the ListView to update.
 
         if (movies != null && !movies.isEmpty()) {
             gridAdapter.addAll(movies);

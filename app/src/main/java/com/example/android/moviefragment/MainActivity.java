@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 return;
             }
-
             GridFragment movieGridFragment = new GridFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, movieGridFragment)

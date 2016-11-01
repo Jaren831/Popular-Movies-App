@@ -1,8 +1,7 @@
 package com.example.android.moviefragment;
 
-import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
-import android.util.Log;
+import android.support.v4.content.AsyncTaskLoader;
 
 import java.util.List;
 
@@ -11,12 +10,7 @@ import java.util.List;
  */
 
 public class MovieLoader extends AsyncTaskLoader<List<Movie>> {
-    /** Tag for log messages */
-    private static final String LOG_TAG = MovieLoader.class.getName();
-
-    /** Query URL */
     private String mUrl;
-
     public MovieLoader(Context context, String url) {
         super(context);
         mUrl = url;
@@ -24,16 +18,11 @@ public class MovieLoader extends AsyncTaskLoader<List<Movie>> {
 
     @Override
     protected void onStartLoading() {
-        Log.i(LOG_TAG, "TEST: Main Activity onStartLoading() called");
-
-
         forceLoad();
     }
 
     @Override
     public List<Movie> loadInBackground() {
-        Log.i(LOG_TAG, "TEST: Main Activity loadInBackground() called");
-
         if (mUrl == null) {
             return null;
         }
