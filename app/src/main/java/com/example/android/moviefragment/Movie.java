@@ -19,12 +19,15 @@ public class Movie implements Parcelable {
 
     private String mDate;
 
-    public Movie(String title, Bitmap image, String plot, int rating, String date) {
+    private String mTrailer;
+
+    public Movie(String title, Bitmap image, String plot, int rating, String date, String trailer) {
         mTitle = title;
         mImage = image;
         mPlot = plot;
         mRating = rating;
         mDate = date;
+        mTrailer = trailer;
     }
 
     public String getTitle() {
@@ -47,12 +50,17 @@ public class Movie implements Parcelable {
         return mDate;
     }
 
+    public String getTrailer() {
+        return mTrailer;
+    }
+
     protected Movie(Parcel in) {
         mTitle = in.readString();
         mImage = (Bitmap) in.readValue(Bitmap.class.getClassLoader());
         mPlot = in.readString();
         mRating = in.readInt();
         mDate = in.readString();
+        mTrailer = in.readString();
     }
 
     @Override
@@ -67,6 +75,7 @@ public class Movie implements Parcelable {
         dest.writeString(mPlot);
         dest.writeInt(mRating);
         dest.writeString(mDate);
+        dest.writeString(mTrailer);
     }
 
     @SuppressWarnings("unused")

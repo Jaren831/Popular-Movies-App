@@ -32,7 +32,6 @@ public class MovieQuery {
 
     public static List<Movie> fetchMovieData(String requestURL) {
         URL url = createUrl(requestURL);
-
         String jsonResponse = null;
 
         try {
@@ -107,7 +106,7 @@ public class MovieQuery {
 
     private static List<Movie> extractMovies(String movieJSON) {
 
-        String imageUrl = "http://image.tmdb.org/t/p/w150";
+        String imageUrl = "http://image.tmdb.org/t/p/w780";
 
         if (TextUtils.isEmpty(movieJSON)) {
             return null;
@@ -127,14 +126,17 @@ public class MovieQuery {
                 String moviePlot = currentMovie.optString("overview");
                 String movieImage = currentMovie.optString("poster_path");
                 movieImage = movieImage.replace("\\", "");
+                String movieTrailerId = currentMovie.optString("id");
 
-                movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating, releaseDate));
+                movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating,
+                        releaseDate, movieTrailerId));
             }
         } catch (JSONException e) {
             Log.e("MovieQuery", "Problem parsing the movie json results", e);
         }
         return movies;
     }
+
     private static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);

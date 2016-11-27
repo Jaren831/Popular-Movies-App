@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -37,8 +36,8 @@ class GridAdapter extends ArrayAdapter<Movie> {
             movieImage.setImageResource(R.drawable.ic_help_outline_black_24dp);
         }
 
-        TextView movie_text = (TextView) gridItemView.findViewById(R.id.movie_title);
-        movie_text.setText(currentMovie.getTitle());
+//        TextView movie_text = (TextView) gridItemView.findViewById(R.id.movie_title);
+//        movie_text.setText(currentMovie.getTitle());
 
         return gridItemView;
     }
