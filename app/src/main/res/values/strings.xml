@@ -15,5 +15,8 @@
     <string name="settings_order_by_best_rated_label">Top Rated</string>
     <string name="settings_order_by_best_rated_value">top_rated</string>
 
+    <string name="settings_show_favorites_label">Favorites</string>
+    <string name="settings_show_favorites_value">favorites</string>
+
     <string name="settings_menu_item">Settings</string>
 </resources>

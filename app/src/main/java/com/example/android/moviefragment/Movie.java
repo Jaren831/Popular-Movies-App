@@ -15,19 +15,19 @@ public class Movie implements Parcelable {
 
     private String mPlot;
 
-    private int mRating;
+    private String mRating;
 
     private String mDate;
 
-    private String mTrailer;
+    private String mID;
 
-    public Movie(String title, Bitmap image, String plot, int rating, String date, String trailer) {
+    public Movie(String title, Bitmap image, String plot, String rating, String date, String id) {
         mTitle = title;
         mImage = image;
         mPlot = plot;
         mRating = rating;
         mDate = date;
-        mTrailer = trailer;
+        mID = id;
     }
 
     public String getTitle() {
@@ -42,7 +42,7 @@ public class Movie implements Parcelable {
         return mPlot;
     }
 
-    public int getRating() {
+    public String getRating() {
         return mRating;
     }
 
@@ -50,17 +50,17 @@ public class Movie implements Parcelable {
         return mDate;
     }
 
-    public String getTrailer() {
-        return mTrailer;
+    public String getID() {
+        return mID;
     }
 
     protected Movie(Parcel in) {
         mTitle = in.readString();
         mImage = (Bitmap) in.readValue(Bitmap.class.getClassLoader());
         mPlot = in.readString();
-        mRating = in.readInt();
+        mRating = in.readString();
         mDate = in.readString();
-        mTrailer = in.readString();
+        mID = in.readString();
     }
 
     @Override
@@ -73,9 +73,9 @@ public class Movie implements Parcelable {
         dest.writeString(mTitle);
         dest.writeValue(mImage);
         dest.writeString(mPlot);
-        dest.writeInt(mRating);
+        dest.writeString(mRating);
         dest.writeString(mDate);
-        dest.writeString(mTrailer);
+        dest.writeString(mID);
     }
 
     @SuppressWarnings("unused")

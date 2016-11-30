@@ -101,11 +101,15 @@ public class GridFragment extends Fragment
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
 
-        Uri baseUri = Uri.parse(MOVIE_URL);
-        Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendPath(orderBy);
-        uriBuilder.appendQueryParameter("api_key", API_KEY);
-        return new MovieLoader(this.getContext(), uriBuilder.toString());
+        if (orderBy == "order_by, favorites") {
+            return new MovieLoader(this.getContext(), null);
+        } else {
+            Uri baseUri = Uri.parse(MOVIE_URL);
+            Uri.Builder uriBuilder = baseUri.buildUpon();
+            uriBuilder.appendPath(orderBy);
+            uriBuilder.appendQueryParameter("api_key", API_KEY);
+            return new MovieLoader(this.getContext(), uriBuilder.toString());
+        }
     }
 
     @Override

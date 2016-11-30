@@ -122,14 +122,14 @@ public class MovieQuery {
 
                 String movieTitle = currentMovie.optString("title");
                 String releaseDate = currentMovie.optString("release_date");
-                int movieRating = currentMovie.optInt("vote_average");
+                String movieRating = currentMovie.optString("vote_average");
                 String moviePlot = currentMovie.optString("overview");
                 String movieImage = currentMovie.optString("poster_path");
                 movieImage = movieImage.replace("\\", "");
-                String movieTrailerId = currentMovie.optString("id");
+                String movieID = currentMovie.optString("id");
 
                 movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating,
-                        releaseDate, movieTrailerId));
+                        releaseDate, movieID));
             }
         } catch (JSONException e) {
             Log.e("MovieQuery", "Problem parsing the movie json results", e);
