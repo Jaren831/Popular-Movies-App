@@ -101,11 +101,14 @@ public class GridFragment extends Fragment
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
 
+        Boolean favorites = true;
+        // Need to get to correspond to favorite selection.
+
         Uri baseUri = Uri.parse(MOVIE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendPath(orderBy);
         uriBuilder.appendQueryParameter("api_key", API_KEY);
-        return new MovieLoader(this.getContext(), uriBuilder.toString());
+        return new MovieLoader(this.getContext(), uriBuilder.toString(), favorites);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.example.android.moviefragment;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -112,7 +111,7 @@ public class MovieQuery {
         return output.toString();
     }
 
-    private List<Movie> extractMovies(String movieJSON, Boolean favorites) {
+    private static List<Movie> extractMovies(String movieJSON, Boolean favorites) {
         String imageUrl = "http://image.tmdb.org/t/p/w780";
 
         if (TextUtils.isEmpty(movieJSON)) {
