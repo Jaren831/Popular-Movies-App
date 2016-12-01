@@ -28,7 +28,9 @@ public class SettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.preferences);
 
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
+            Preference show = findPreference(getString(R.string.settings_show_key));
             bindPreferenceSummaryToValue(orderBy);
+            bindPreferenceSummaryToValue(show);
         }
 
         @Override

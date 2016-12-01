@@ -1,9 +1,13 @@
 package com.example.android.moviefragment;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.example.android.moviefragment.Data.FavoritesDbHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,20 +31,24 @@ import java.util.List;
 public class MovieQuery {
 
     public static final String LOG_TAG = MovieQuery.class.getSimpleName();
+    public static Boolean favoritesCheck = null;
+    public FavoritesDbHelper dbHelper;
+
 
     private MovieQuery() {}
 
-    public static List<Movie> fetchMovieData(String requestURL) {
+
+    public static List<Movie> fetchMovieData(String requestURL, Boolean favorites) {
         URL url = createUrl(requestURL);
         String jsonResponse = null;
-
+        favoritesCheck = favorites;
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        List<Movie> movies = extractMovies(jsonResponse);
+        List<Movie> movies = extractMovies(jsonResponse, favoritesCheck);
 
         return movies;
     }
@@ -104,14 +112,12 @@ public class MovieQuery {
         return output.toString();
     }
 
-    private static List<Movie> extractMovies(String movieJSON) {
-
+    private List<Movie> extractMovies(String movieJSON, Boolean favorites) {
         String imageUrl = "http://image.tmdb.org/t/p/w780";
 
         if (TextUtils.isEmpty(movieJSON)) {
             return null;
         }
-
         List<Movie> movies = new ArrayList<>();
 
         try {
@@ -128,6 +134,11 @@ public class MovieQuery {
                 movieImage = movieImage.replace("\\", "");
                 String movieID = currentMovie.optString("id");
 
+                if (favorites == true) {
+                    SQLiteDatabase db;
+                }
+                // Check if favorites. If true only add movies with corresponding id to array. Dbhelper not work
+                // working need to figure out.
                 movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating,
                         releaseDate, movieID));
             }

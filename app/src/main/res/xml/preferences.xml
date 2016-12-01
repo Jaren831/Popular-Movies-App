@@ -10,5 +10,11 @@
         android:entries="@array/settings_order_by_labels"
         android:entryValues="@array/settings_order_by_values"
         android:defaultValue="@string/settings_order_by_default"/>
-
+    <ListPreference
+        android:key="@string/settings_show_key"
+        android:title="@string/settings_show_title"
+        android:dialogTitle="@string/order_by_dialog_title"
+        android:entries="@array/settings_show_favorites_labels"
+        android:entryValues="@array/settings_show_favorites_values"
+        android:defaultValue="@string/settings_show_default" />
 </PreferenceScreen>

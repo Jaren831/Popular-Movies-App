@@ -9,11 +9,18 @@
     <string name="settings_order_by_key">order_by</string>
     <string name="settings_order_by_default">@string/settings_order_by_most_popular_value</string>
 
+    <string name="settings_show_title">Show</string>
+    <string name="settings_show_key">show</string>
+    <string name="settings_show_default">@string/settings_show_all_value</string>
+
     <string name="settings_order_by_most_popular_label">Most Popular</string>
     <string name="settings_order_by_most_popular_value">popular</string>
 
     <string name="settings_order_by_best_rated_label">Top Rated</string>
     <string name="settings_order_by_best_rated_value">top_rated</string>
+
+    <string name="settings_show_all_label">All</string>
+    <string name="settings_show_all_value">all</string>
 
     <string name="settings_show_favorites_label">Favorites</string>
     <string name="settings_show_favorites_value">favorites</string>

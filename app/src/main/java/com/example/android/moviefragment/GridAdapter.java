@@ -36,9 +36,6 @@ class GridAdapter extends ArrayAdapter<Movie> {
             movieImage.setImageResource(R.drawable.ic_help_outline_black_24dp);
         }
 
-//        TextView movie_text = (TextView) gridItemView.findViewById(R.id.movie_title);
-//        movie_text.setText(currentMovie.getTitle());
-
         return gridItemView;
     }
 }
