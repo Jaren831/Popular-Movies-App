@@ -1,11 +1,14 @@
 package com.example.android.moviefragment;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.android.moviefragment.Data.FavoritesContract;
 import com.example.android.moviefragment.Data.FavoritesDbHelper;
 
 import org.json.JSONArray;
@@ -31,13 +34,13 @@ public class MovieQuery {
 
     public static final String LOG_TAG = MovieQuery.class.getSimpleName();
     public static Boolean favoritesCheck = null;
-    public FavoritesDbHelper dbHelper;
-
+    public static FavoritesDbHelper mDbHelper;
+    public static Cursor cursor;
 
     private MovieQuery() {}
 
 
-    public static List<Movie> fetchMovieData(String requestURL, Boolean favorites) {
+    public static List<Movie> fetchMovieData(String requestURL, Boolean favorites, Context context) {
         URL url = createUrl(requestURL);
         String jsonResponse = null;
         favoritesCheck = favorites;
@@ -47,9 +50,7 @@ public class MovieQuery {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        List<Movie> movies = extractMovies(jsonResponse, favoritesCheck);
-
-        return movies;
+        return extractMovies(jsonResponse, favoritesCheck, context);
     }
 
     private static URL createUrl(String stringUrl) {
@@ -111,7 +112,7 @@ public class MovieQuery {
         return output.toString();
     }
 
-    private static List<Movie> extractMovies(String movieJSON, Boolean favorites) {
+    private static List<Movie> extractMovies(String movieJSON, Boolean favorites, Context context) {
         String imageUrl = "http://image.tmdb.org/t/p/w780";
 
         if (TextUtils.isEmpty(movieJSON)) {
@@ -133,13 +134,22 @@ public class MovieQuery {
                 movieImage = movieImage.replace("\\", "");
                 String movieID = currentMovie.optString("id");
 
-                if (favorites == true) {
-                    SQLiteDatabase db;
+                if (favorites) {
+                    mDbHelper = new FavoritesDbHelper(context);
+                    SQLiteDatabase db = mDbHelper.getReadableDatabase();
+                    String filter = "moviedb=" + movieID;
+                    String[] columns = {
+                            FavoritesContract.FavoriteEntry.COLUMN_MOVIE_DBID};
+                    cursor = db.query(FavoritesContract.FavoriteEntry.TABLE_NAME, columns,
+                            filter, null, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating,
+                                releaseDate, movieID));
+                    }
+                } else {
+                    movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating,
+                            releaseDate, movieID));
                 }
-                // Check if favorites. If true only add movies with corresponding id to array. Dbhelper not work
-                // working need to figure out.
-                movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating,
-                        releaseDate, movieID));
             }
         } catch (JSONException e) {
             Log.e("MovieQuery", "Problem parsing the movie json results", e);

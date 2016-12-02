@@ -12,10 +12,12 @@ import java.util.List;
 public class MovieLoader extends AsyncTaskLoader<List<Movie>> {
     private String mUrl;
     private Boolean mFavorites;
+    private Context mContext;
     public MovieLoader(Context context, String url, Boolean favorites) {
         super(context);
         mUrl = url;
         mFavorites = favorites;
+        mContext = context;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class MovieLoader extends AsyncTaskLoader<List<Movie>> {
         if (mUrl == null) {
             return null;
         }
-        List<Movie> movies = MovieQuery.fetchMovieData(mUrl, mFavorites);
+        List<Movie> movies = MovieQuery.fetchMovieData(mUrl, mFavorites, mContext);
         return movies;
 
     }
