@@ -1,8 +1,13 @@
 <resources>
+    <string name="api_key">42e95964a6932d7d9b7d25f1c0c70c01</string>
     <string name="app_name">PopularMovies</string>
     <string name="settings">Settings</string>
     <string name="order_by_dialog_title">Select</string>
     <string name="empty">No movies found</string>
+    <string name="empty_review">No reviews found</string>
+    <string name="empty_trailers">No trailers found</string>
+
+
     <string name="noInternet">No internet connection</string>
 
     <string name="settings_order_by_title">Order By</string>

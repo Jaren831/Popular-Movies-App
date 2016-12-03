@@ -146,6 +146,8 @@ public class MovieQuery {
                         movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating,
                                 releaseDate, movieID));
                     }
+                    db.close();
+                    cursor.close();
                 } else {
                     movies.add(new Movie(movieTitle, getBitmapFromURL(imageUrl + movieImage), moviePlot, movieRating,
                             releaseDate, movieID));
