@@ -33,7 +33,7 @@ public class GridFragment extends Fragment
     GridView gridView;
     TextView emptyView;
     ProgressBar mProgressBar;
-    Boolean favorites = false;
+    Boolean favorites;
     private static final int MOVIE_LOADER_ID = 1;
     public static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
     public static final String API_KEY = "42e95964a6932d7d9b7d25f1c0c70c01";
@@ -106,14 +106,18 @@ public class GridFragment extends Fragment
                 getString(R.string.settings_show_key),
                 getString(R.string.settings_show_default));
 
-        Toast.makeText(getActivity(), show, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), show, Toast.LENGTH_SHORT).show();
 
-        favorites = true;
+        switch (show) {
+            case "all":
+                favorites = false;
+                break;
+            case "favorites":
+                favorites = true;
+                break;
+        }
 
-        Toast.makeText(getActivity(), favorites.toString(), Toast.LENGTH_LONG).show();
-
-
-        // Need to get to correspond to favorite selection.
+//        Toast.makeText(getActivity(), favorites.toString(), Toast.LENGTH_LONG).show();
 
         Uri baseUri = Uri.parse(MOVIE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -131,7 +135,6 @@ public class GridFragment extends Fragment
         if (movies != null && !movies.isEmpty()) {
             gridAdapter.addAll(movies);
         }
-
     }
 
     @Override

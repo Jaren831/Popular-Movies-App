@@ -57,4 +57,14 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:layout_marginTop="16dp"/>
+    <ExpandableListView
+        android:id="@+id/trailer_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ExpandableListView>
+    <ExpandableListView
+        android:id="@+id/review_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ExpandableListView>
 </LinearLayout>
