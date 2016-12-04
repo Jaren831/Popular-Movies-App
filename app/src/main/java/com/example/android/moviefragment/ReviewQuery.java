@@ -108,7 +108,7 @@ public class ReviewQuery {
             JSONArray jsonArray = jsonRootObject.optJSONArray("results");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject currentReview = jsonArray.getJSONObject(i);
-                String reviewAuthor = currentReview.optString("author");
+                String reviewAuthor = "- " + currentReview.optString("author");
                 String reviewText = currentReview.optString("content");
                 reviews.add(new Review(reviewAuthor, reviewText));
             }

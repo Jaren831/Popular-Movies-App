@@ -29,8 +29,6 @@ public class TrailerAdapter extends ArrayAdapter<Trailer> {
         TextView trailerName = (TextView) listItemView.findViewById(R.id.trailer_text);
         trailerName.setText(currentTrailer.getTrailerName());
 
-
-
         return listItemView;
     }
 }

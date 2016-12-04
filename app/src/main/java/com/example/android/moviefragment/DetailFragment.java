@@ -1,10 +1,13 @@
 package com.example.android.moviefragment;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +37,9 @@ import static com.example.android.moviefragment.R.id.detail_image;
 
 public class DetailFragment extends Fragment {
 
+
+    public static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
+
     public static final String REVIEW_URL = "http://api.themoviedb.org/3/movie/83542/reviews";
     public static final String TRAILER_URL = "http://api.themoviedb.org/3/movie/157336/videos";
 
@@ -54,19 +60,15 @@ public class DetailFragment extends Fragment {
     String movieDate;
 
     ListView trailerList;
-    String trailerName;
     TrailerAdapter trailerAdapter;
+    ProgressBar trailerProgress;
 
     ListView reviewList;
-    String authorName;
-    String reviewText;
     ReviewAdapter reviewAdapter;
+    ProgressBar reviewProgress;
 
     TextView emptyReview;
     TextView emptyTrailer;
-
-
-    private ProgressBar mProgressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,6 +100,8 @@ public class DetailFragment extends Fragment {
         detailDate.setText(currentMovie.getDate());
 
         movieId = currentMovie.getID();
+        bundle = new Bundle();
+        bundle.putString("id", movieId);
         movieTitle = currentMovie.getTitle();
         moviePlot = currentMovie.getPlot();
         movieRating = currentMovie.getRating();
@@ -139,19 +143,36 @@ public class DetailFragment extends Fragment {
             }
         });
 
-
-        getLoaderManager().restartLoader(LOADER_REVIEW, null, new LoaderReviewCallbacks());
-        getLoaderManager().restartLoader(LOADER_TRAILER, null, new LoaderTrailerCallbacks());
-
         reviewList = (ListView) rootView.findViewById(R.id.review_list);
         emptyReview = (TextView) rootView.findViewById(R.id.empty_review);
+        reviewProgress = (ProgressBar) rootView.findViewById(R.id.progressBar_review);
         reviewAdapter = new ReviewAdapter(getContext());
         reviewList.setAdapter(reviewAdapter);
 
         trailerList = (ListView) rootView.findViewById(R.id.trailer_list);
         emptyTrailer = (TextView) rootView.findViewById(R.id.empty_trailer);
+        trailerProgress = (ProgressBar) rootView.findViewById(R.id.progressBar_trailer);
         trailerAdapter = new TrailerAdapter(getContext());
-        trailerList.setAdapter(reviewAdapter);
+        trailerList.setAdapter(trailerAdapter);
+
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (isConnected) {
+            getLoaderManager().initLoader(LOADER_REVIEW, bundle, new LoaderReviewCallbacks());
+            getLoaderManager().initLoader(LOADER_TRAILER, bundle, new LoaderTrailerCallbacks());
+        } else {
+            reviewProgress.setVisibility(View.GONE);
+            trailerProgress.setVisibility(View.GONE);
+            emptyReview.setText(R.string.noInternet);
+            emptyTrailer.setText(R.string.noInternet);
+        }
+        trailerList.setEmptyView(emptyTrailer);
+        reviewList.setEmptyView(emptyReview);
 
         return rootView;
     }
@@ -176,18 +197,21 @@ public class DetailFragment extends Fragment {
     }
     public class LoaderReviewCallbacks implements LoaderManager.LoaderCallbacks<List<Review>> {
         @Override
-        public Loader<List<Review>> onCreateLoader(int loaderId, Bundle bundle) {
-            Uri baseUri = Uri.parse(REVIEW_URL);
+        public Loader<List<Review>> onCreateLoader(int id, Bundle bundle) {
+            String reviewID = bundle.getString("id");
+            Uri baseUri = Uri.parse(MOVIE_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
+            uriBuilder.appendPath(reviewID);
+            uriBuilder.appendPath("reviews");
             uriBuilder.appendQueryParameter("api_key", API_KEY);
             return new ReviewLoader(getContext(), uriBuilder.toString());
         }
 
         @Override
         public void onLoadFinished(Loader<List<Review>> loader, List<Review> reviews) {
-            emptyReview.setText(R.string.empty);
+            emptyReview.setText(R.string.empty_review);
             reviewAdapter.clear();
-            mProgressBar.setVisibility(View.GONE);
+            reviewProgress.setVisibility(View.GONE);
 
             if (reviews != null && !reviews.isEmpty()) {
                 reviewAdapter.addAll(reviews);
@@ -202,16 +226,19 @@ public class DetailFragment extends Fragment {
     public class LoaderTrailerCallbacks implements LoaderManager.LoaderCallbacks<List<Trailer>> {
         @Override
         public Loader<List<Trailer>> onCreateLoader(int id, Bundle bundle) {
-            Uri baseUri = Uri.parse(TRAILER_URL);
+            String trailerID = bundle.getString("id");
+            Uri baseUri = Uri.parse(MOVIE_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
+            uriBuilder.appendPath(trailerID);
+            uriBuilder.appendPath("videos");
             uriBuilder.appendQueryParameter("api_key", API_KEY);
             return new TrailerLoader(getContext(), uriBuilder.toString());
         }
         @Override
         public void onLoadFinished(Loader<List<Trailer>> loader, List<Trailer> trailers) {
-            emptyTrailer.setText(R.string.empty);
+            emptyTrailer.setText(R.string.empty_trailers);
             trailerAdapter.clear();
-            mProgressBar.setVisibility(View.GONE);
+            trailerProgress.setVisibility(View.GONE);
 
             if (trailers != null && !trailers.isEmpty()) {
                 trailerAdapter.addAll(trailers);

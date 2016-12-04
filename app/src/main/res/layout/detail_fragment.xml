@@ -4,15 +4,16 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/detail_fragment"
-    android:weightSum="1">
+    android:id="@+id/detail_fragment">
 
     <TextView
         android:id="@+id/detail_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginTop="-8dp"
+        android:layout_marginBottom="8dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,37 +35,82 @@
                 android:id="@+id/detail_rating"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="right"
                 android:layout_height="0dp"/>
             <TextView
                 android:id="@+id/detail_date"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="right"
                 android:layout_height="0dp"/>
             <CheckBox
                 android:id="@+id/favorite_check"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="right"
                 android:layout_height="0dp"
-                android:text="Favorite"/>
+                android:text="@string/favorite"/>
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Plot"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"/>
     <TextView
         android:id="@+id/detail_plot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
-        android:layout_marginTop="16dp"/>
-    <ExpandableListView
-        android:id="@+id/trailer_list"
+        android:gravity="start"/>
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ExpandableListView>
-    <ExpandableListView
+        android:layout_height="wrap_content"
+        android:text="Reviews"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"/>
+    <ListView
         android:id="@+id/review_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ExpandableListView>
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dp">
+    </ListView>
+
+    <TextView
+        android:id="@+id/empty_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trailers"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"/>
+    <ListView
+        android:id="@+id/trailer_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dp">
+    </ListView>
+    <TextView
+        android:id="@+id/empty_trailer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_gravity="center"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar_review"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"/>
+    <ProgressBar
+        android:id="@+id/progressBar_trailer"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"/>
 </LinearLayout>

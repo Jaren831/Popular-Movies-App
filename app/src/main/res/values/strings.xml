@@ -6,6 +6,7 @@
     <string name="empty">No movies found</string>
     <string name="empty_review">No reviews found</string>
     <string name="empty_trailers">No trailers found</string>
+    <string name="favorite">Favorite</string>
 
 
     <string name="noInternet">No internet connection</string>

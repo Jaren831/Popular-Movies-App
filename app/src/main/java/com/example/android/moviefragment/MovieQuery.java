@@ -127,8 +127,8 @@ public class MovieQuery {
                 JSONObject currentMovie = jsonArray.getJSONObject(i);
 
                 String movieTitle = currentMovie.optString("title");
-                String releaseDate = currentMovie.optString("release_date");
-                String movieRating = currentMovie.optString("vote_average");
+                String releaseDate = "Release Date: " + currentMovie.optString("release_date");
+                String movieRating = "Rating: " + currentMovie.optString("vote_average");
                 String moviePlot = currentMovie.optString("overview");
                 String movieImage = currentMovie.optString("poster_path");
                 movieImage = movieImage.replace("\\", "");
