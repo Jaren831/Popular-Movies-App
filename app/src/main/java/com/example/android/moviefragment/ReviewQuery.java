@@ -110,7 +110,8 @@ public class ReviewQuery {
                 JSONObject currentReview = jsonArray.getJSONObject(i);
                 String reviewAuthor = "- " + currentReview.optString("author");
                 String reviewText = currentReview.optString("content");
-                reviews.add(new Review(reviewAuthor, reviewText));
+                String reviewUrl = currentReview.optString("url");
+                reviews.add(new Review(reviewAuthor, reviewText, reviewUrl));
             }
         } catch (JSONException e) {
             Log.e("ReviewQuery", "Problem parsing the review json results", e);

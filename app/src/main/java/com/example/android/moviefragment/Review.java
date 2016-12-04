@@ -9,9 +9,12 @@ public class Review {
 
     private String mReview;
 
-    public Review(String author,String review) {
+    private String mUrl;
+
+    public Review(String author,String review, String url) {
         mAuthor = author;
         mReview = review;
+        mUrl = url;
     }
 
     public String getAuthor() {
@@ -19,5 +22,9 @@ public class Review {
     }
     public String getReview() {
         return mReview;
+    }
+
+    public String getUrl() {
+        return mUrl;
     }
 }

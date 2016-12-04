@@ -106,8 +106,6 @@ public class GridFragment extends Fragment
                 getString(R.string.settings_show_key),
                 getString(R.string.settings_show_default));
 
-//        Toast.makeText(getActivity(), show, Toast.LENGTH_SHORT).show();
-
         switch (show) {
             case "all":
                 favorites = false;
@@ -116,8 +114,6 @@ public class GridFragment extends Fragment
                 favorites = true;
                 break;
         }
-
-//        Toast.makeText(getActivity(), favorites.toString(), Toast.LENGTH_LONG).show();
 
         Uri baseUri = Uri.parse(MOVIE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();

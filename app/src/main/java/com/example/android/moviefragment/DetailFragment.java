@@ -2,6 +2,7 @@ package com.example.android.moviefragment;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -39,12 +41,7 @@ public class DetailFragment extends Fragment {
 
 
     public static final String MOVIE_URL = "http://api.themoviedb.org/3/movie";
-
-    public static final String REVIEW_URL = "http://api.themoviedb.org/3/movie/83542/reviews";
-    public static final String TRAILER_URL = "http://api.themoviedb.org/3/movie/157336/videos";
-
     public static final String API_KEY = "42e95964a6932d7d9b7d25f1c0c70c01";
-
     private static final int LOADER_REVIEW = 0;
     private static final int LOADER_TRAILER = 1;
 
@@ -173,6 +170,27 @@ public class DetailFragment extends Fragment {
         }
         trailerList.setEmptyView(emptyTrailer);
         reviewList.setEmptyView(emptyReview);
+
+        trailerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Trailer currentTrailer = trailerAdapter.getItem(position);
+                Uri trailerUri = Uri.parse(R.string.trailer_base_url + currentTrailer.getYoutubeKey());
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, trailerUri);
+                startActivity(websiteIntent);
+            }
+        });
+
+        reviewList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Review currentReview = reviewAdapter.getItem(position);
+                Uri reviewUri = Uri.parse(currentReview.getUrl());
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, reviewUri);
+                startActivity(websiteIntent);
+            }
+        });
+
 
         return rootView;
     }
