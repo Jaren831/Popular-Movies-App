@@ -175,7 +175,7 @@ public class DetailFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Trailer currentTrailer = trailerAdapter.getItem(position);
-                Uri trailerUri = Uri.parse(R.string.trailer_base_url + currentTrailer.getYoutubeKey());
+                Uri trailerUri = Uri.parse(getResources().getString(R.string.trailer_base_url) + currentTrailer.getYoutubeKey());
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, trailerUri);
                 startActivity(websiteIntent);
             }

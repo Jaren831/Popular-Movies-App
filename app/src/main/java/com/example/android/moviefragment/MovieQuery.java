@@ -125,10 +125,9 @@ public class MovieQuery {
             JSONArray jsonArray = jsonRootObject.optJSONArray("results");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject currentMovie = jsonArray.getJSONObject(i);
-
                 String movieTitle = currentMovie.optString("title");
-                String releaseDate = R.string.release_date + ": " + currentMovie.optString("release_date");
-                String movieRating = R.string.rating + ": " + currentMovie.optString("vote_average");
+                String releaseDate = "Release Date" + ": " + currentMovie.optString("release_date");
+                String movieRating = "Rating" + ": " + currentMovie.optString("vote_average");
                 String moviePlot = currentMovie.optString("overview");
                 String movieImage = currentMovie.optString("poster_path");
                 movieImage = movieImage.replace("\\", "");
