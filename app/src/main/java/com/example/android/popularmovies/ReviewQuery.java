@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,13 +22,13 @@ import java.util.List;
  * Created by Jaren Lynch on 12/2/2016.
  */
 
-public class TrailerQuery {
-    public static final String LOG_TAG = TrailerQuery.class.getSimpleName();
+public class ReviewQuery {
+    public static final String LOG_TAG = ReviewQuery.class.getSimpleName();
 
-    private TrailerQuery() {}
+    private ReviewQuery() {}
 
 
-    public static List<Trailer> fetchTrailerData(String requestURL) {
+    public static List<Review> fetchReviewData(String requestURL) {
         URL url = createUrl(requestURL);
         String jsonResponse = null;
         try {
@@ -37,7 +37,7 @@ public class TrailerQuery {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        return extractTrailers(jsonResponse);
+        return extractReviews(jsonResponse);
     }
 
     private static URL createUrl(String stringUrl) {
@@ -71,7 +71,7 @@ public class TrailerQuery {
                 Log.e(LOG_TAG, "Error return code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the trailer JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the review JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -97,25 +97,25 @@ public class TrailerQuery {
         return output.toString();
     }
 
-    private static List<Trailer> extractTrailers(String trailerJSON) {
-        if (TextUtils.isEmpty(trailerJSON)) {
+    private static List<Review> extractReviews(String reviewJSON) {
+        if (TextUtils.isEmpty(reviewJSON)) {
             return null;
         }
-        List<Trailer> trailers = new ArrayList<>();
+        List<Review> reviews = new ArrayList<>();
 
         try {
-            JSONObject jsonRootObject = new JSONObject(trailerJSON);
+            JSONObject jsonRootObject = new JSONObject(reviewJSON);
             JSONArray jsonArray = jsonRootObject.optJSONArray("results");
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject currentTrailer = jsonArray.getJSONObject(i);
-
-                String trailerName = currentTrailer.optString("name");
-                String youtubeKey = currentTrailer.optString("key");
-                trailers.add(new Trailer(youtubeKey, trailerName));
+                JSONObject currentReview = jsonArray.getJSONObject(i);
+                String reviewAuthor = "- " + currentReview.optString("author");
+                String reviewText = currentReview.optString("content");
+                String reviewUrl = currentReview.optString("url");
+                reviews.add(new Review(reviewAuthor, reviewText, reviewUrl));
             }
         } catch (JSONException e) {
-            Log.e("TrailerQuery", "Problem parsing the trailer json results", e);
+            Log.e("ReviewQuery", "Problem parsing the review json results", e);
         }
-        return trailers;
+        return reviews;
     }
 }

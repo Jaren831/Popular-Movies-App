@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -21,12 +21,12 @@ public class TrailerAdapter extends ArrayAdapter<Trailer> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View listItemView = convertView;
         if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.trailer_item, parent, false);
+            listItemView = LayoutInflater.from(getContext()).inflate(com.example.android.popularmovies.R.layout.trailer_item, parent, false);
         }
 
         Trailer currentTrailer = getItem(position);
 
-        TextView trailerName = (TextView) listItemView.findViewById(R.id.trailer_text);
+        TextView trailerName = (TextView) listItemView.findViewById(com.example.android.popularmovies.R.id.trailer_text);
         trailerName.setText(currentTrailer.getTrailerName());
 
         return listItemView;

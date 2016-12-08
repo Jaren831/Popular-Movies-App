@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,8 +8,8 @@ import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.android.moviefragment.Data.FavoritesContract;
-import com.example.android.moviefragment.Data.FavoritesDbHelper;
+import com.example.android.popularmovies.Data.FavoritesContract;
+import com.example.android.popularmovies.Data.FavoritesDbHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;

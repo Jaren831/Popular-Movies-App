@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import static com.example.android.moviefragment.R.id.movie_image;
+import static com.example.android.popularmovies.R.id.movie_image;
 
 /**
  * Created by Jaren Lynch on 9/20/2016.
@@ -25,7 +25,7 @@ class GridAdapter extends ArrayAdapter<Movie> {
         View gridItemView = convertView;
         if (gridItemView == null) {
             gridItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.grid_item, parent, false);
+                    com.example.android.popularmovies.R.layout.grid_item, parent, false);
         }
         Movie currentMovie = getItem(position);
 
@@ -33,7 +33,7 @@ class GridAdapter extends ArrayAdapter<Movie> {
         if (currentMovie.getImage() != null) {
             movieImage.setImageBitmap(currentMovie.getImage());
         } else {
-            movieImage.setImageResource(R.drawable.ic_help_outline_black_24dp);
+            movieImage.setImageResource(com.example.android.popularmovies.R.drawable.ic_help_outline_black_24dp);
         }
 
         return gridItemView;

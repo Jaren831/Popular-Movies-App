@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -47,11 +47,11 @@ public class GridFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.grid_fragment, container, false);
-        gridView = (GridView) rootView.findViewById(R.id.movie_grid);
+        View rootView = inflater.inflate(com.example.android.popularmovies.R.layout.grid_fragment, container, false);
+        gridView = (GridView) rootView.findViewById(com.example.android.popularmovies.R.id.movie_grid);
         gridAdapter = new GridAdapter(getActivity(), new ArrayList<Movie>());
-        emptyView = (TextView) rootView.findViewById(R.id.empty);
-        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        emptyView = (TextView) rootView.findViewById(com.example.android.popularmovies.R.id.empty);
+        mProgressBar = (ProgressBar) rootView.findViewById(com.example.android.popularmovies.R.id.progressBar);
         android.support.v4.app.LoaderManager loaderManager = getLoaderManager();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         preferences.registerOnSharedPreferenceChangeListener(listener);
@@ -73,7 +73,7 @@ public class GridFragment extends Fragment
             loaderManager.initLoader(MOVIE_LOADER_ID, null, this);
         } else {
             mProgressBar.setVisibility(View.GONE);
-            emptyView.setText(R.string.noInternet);
+            emptyView.setText(com.example.android.popularmovies.R.string.noInternet);
         }
 
         gridView.setEmptyView(emptyView);
@@ -87,7 +87,7 @@ public class GridFragment extends Fragment
                 args.putParcelable("selectedMovie", currentMovie);
                 detailFragment.setArguments(args);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, detailFragment);
+                transaction.replace(com.example.android.popularmovies.R.id.fragment_container, detailFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
@@ -99,12 +99,12 @@ public class GridFragment extends Fragment
     public Loader<List<Movie>> onCreateLoader(int id, Bundle bundle) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String orderBy = sharedPrefs.getString(
-                getString(R.string.settings_order_by_key),
-                getString(R.string.settings_order_by_default));
+                getString(com.example.android.popularmovies.R.string.settings_order_by_key),
+                getString(com.example.android.popularmovies.R.string.settings_order_by_default));
 
         String show = sharedPrefs.getString(
-                getString(R.string.settings_show_key),
-                getString(R.string.settings_show_default));
+                getString(com.example.android.popularmovies.R.string.settings_show_key),
+                getString(com.example.android.popularmovies.R.string.settings_show_default));
 
         switch (show) {
             case "all":
@@ -124,7 +124,7 @@ public class GridFragment extends Fragment
 
     @Override
     public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movies) {
-        emptyView.setText(R.string.empty);
+        emptyView.setText(com.example.android.popularmovies.R.string.empty);
         gridAdapter.clear();
         mProgressBar.setVisibility(View.GONE);
 

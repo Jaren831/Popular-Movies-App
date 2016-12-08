@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;

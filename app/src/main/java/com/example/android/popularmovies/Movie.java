@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.graphics.Bitmap;
 import android.os.Parcel;

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "811581422155",
+    "firebase_url": "https://popular-movies-151802.firebaseio.com",
+    "project_id": "popular-movies-151802",
+    "storage_bucket": "popular-movies-151802.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811581422155:android:24b2f8c3aba22b54",
+        "android_client_info": {
+          "package_name": "com.example.android.moviefragment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811581422155-ai565b20dko8r6n76ut7fm0df0csisql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHNlMJ4mKWlkNiTml0jnbbTQdr9du1kH8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

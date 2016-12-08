@@ -1,4 +1,4 @@
-package com.example.android.moviefragment.Data;
+package com.example.android.popularmovies.Data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

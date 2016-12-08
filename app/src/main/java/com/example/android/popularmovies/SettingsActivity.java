@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,17 +18,17 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.settings_activity);
+        setContentView(com.example.android.popularmovies.R.layout.settings_activity);
     }
     public static class MoviePreferenceFragment extends PreferenceFragment
             implements Preference.OnPreferenceChangeListener {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences);
+            addPreferencesFromResource(com.example.android.popularmovies.R.xml.preferences);
 
-            Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
-            Preference show = findPreference(getString(R.string.settings_show_key));
+            Preference orderBy = findPreference(getString(com.example.android.popularmovies.R.string.settings_order_by_key));
+            Preference show = findPreference(getString(com.example.android.popularmovies.R.string.settings_show_key));
             bindPreferenceSummaryToValue(orderBy);
             bindPreferenceSummaryToValue(show);
         }

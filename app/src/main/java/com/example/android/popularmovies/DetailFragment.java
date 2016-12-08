@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,13 +25,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.moviefragment.Data.FavoritesContract;
-import com.example.android.moviefragment.Data.FavoritesDbHelper;
+import com.example.android.popularmovies.Data.FavoritesContract;
+import com.example.android.popularmovies.Data.FavoritesDbHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-import static com.example.android.moviefragment.R.id.detail_image;
+import static com.example.android.popularmovies.R.id.detail_image;
 
 /**
  * Created by Jaren Lynch on 9/23/2016.
@@ -71,7 +71,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.detail_fragment, container, false);
+        View rootView = inflater.inflate(com.example.android.popularmovies.R.layout.detail_fragment, container, false);
 
         Bundle bundle = this.getArguments();
         final Movie currentMovie = bundle.getParcelable("selectedMovie");
@@ -80,20 +80,20 @@ public class DetailFragment extends Fragment {
         if (currentMovie.getImage() != null) {
             movieImage.setImageBitmap(currentMovie.getImage());
         } else {
-            movieImage.setImageResource(R.drawable.ic_help_outline_black_24dp);
+            movieImage.setImageResource(com.example.android.popularmovies.R.drawable.ic_help_outline_black_24dp);
         }
 
-        TextView detailText = (TextView) rootView.findViewById(R.id.detail_title);
+        TextView detailText = (TextView) rootView.findViewById(com.example.android.popularmovies.R.id.detail_title);
         detailText.setText(currentMovie.getTitle());
 
-        TextView detailPlot = (TextView) rootView.findViewById(R.id.detail_plot);
+        TextView detailPlot = (TextView) rootView.findViewById(com.example.android.popularmovies.R.id.detail_plot);
         detailPlot.setSelected(true);
         detailPlot.setText(currentMovie.getPlot());
 
-        TextView detailRating = (TextView) rootView.findViewById(R.id.detail_rating);
+        TextView detailRating = (TextView) rootView.findViewById(com.example.android.popularmovies.R.id.detail_rating);
         detailRating.setText(currentMovie.getRating() + " / 10");
 
-        TextView detailDate = (TextView) rootView.findViewById(R.id.detail_date);
+        TextView detailDate = (TextView) rootView.findViewById(com.example.android.popularmovies.R.id.detail_date);
         detailDate.setText(currentMovie.getDate());
 
         movieId = currentMovie.getID();
@@ -104,7 +104,7 @@ public class DetailFragment extends Fragment {
         movieRating = currentMovie.getRating();
         movieDate = currentMovie.getDate();
 
-        CheckBox favoriteCheck = (CheckBox) rootView.findViewById(R.id.favorite_check);
+        CheckBox favoriteCheck = (CheckBox) rootView.findViewById(com.example.android.popularmovies.R.id.favorite_check);
         if (CheckIfFavorite(movieId)) {
             favoriteCheck.setChecked(true);
         } else {
@@ -140,15 +140,15 @@ public class DetailFragment extends Fragment {
             }
         });
 
-        reviewList = (ListView) rootView.findViewById(R.id.review_list);
-        emptyReview = (TextView) rootView.findViewById(R.id.empty_review);
-        reviewProgress = (ProgressBar) rootView.findViewById(R.id.progressBar_review);
+        reviewList = (ListView) rootView.findViewById(com.example.android.popularmovies.R.id.review_list);
+        emptyReview = (TextView) rootView.findViewById(com.example.android.popularmovies.R.id.empty_review);
+        reviewProgress = (ProgressBar) rootView.findViewById(com.example.android.popularmovies.R.id.progressBar_review);
         reviewAdapter = new ReviewAdapter(getContext());
         reviewList.setAdapter(reviewAdapter);
 
-        trailerList = (ListView) rootView.findViewById(R.id.trailer_list);
-        emptyTrailer = (TextView) rootView.findViewById(R.id.empty_trailer);
-        trailerProgress = (ProgressBar) rootView.findViewById(R.id.progressBar_trailer);
+        trailerList = (ListView) rootView.findViewById(com.example.android.popularmovies.R.id.trailer_list);
+        emptyTrailer = (TextView) rootView.findViewById(com.example.android.popularmovies.R.id.empty_trailer);
+        trailerProgress = (ProgressBar) rootView.findViewById(com.example.android.popularmovies.R.id.progressBar_trailer);
         trailerAdapter = new TrailerAdapter(getContext());
         trailerList.setAdapter(trailerAdapter);
 
@@ -165,8 +165,8 @@ public class DetailFragment extends Fragment {
         } else {
             reviewProgress.setVisibility(View.GONE);
             trailerProgress.setVisibility(View.GONE);
-            emptyReview.setText(R.string.noInternet);
-            emptyTrailer.setText(R.string.noInternet);
+            emptyReview.setText(com.example.android.popularmovies.R.string.noInternet);
+            emptyTrailer.setText(com.example.android.popularmovies.R.string.noInternet);
         }
         trailerList.setEmptyView(emptyTrailer);
         reviewList.setEmptyView(emptyReview);
@@ -175,7 +175,7 @@ public class DetailFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Trailer currentTrailer = trailerAdapter.getItem(position);
-                Uri trailerUri = Uri.parse(getResources().getString(R.string.trailer_base_url) + currentTrailer.getYoutubeKey());
+                Uri trailerUri = Uri.parse(getResources().getString(com.example.android.popularmovies.R.string.trailer_base_url) + currentTrailer.getYoutubeKey());
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, trailerUri);
                 startActivity(websiteIntent);
             }
@@ -227,7 +227,7 @@ public class DetailFragment extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<List<Review>> loader, List<Review> reviews) {
-            emptyReview.setText(R.string.empty_review);
+            emptyReview.setText(com.example.android.popularmovies.R.string.empty_review);
             reviewAdapter.clear();
             reviewProgress.setVisibility(View.GONE);
 
@@ -254,7 +254,7 @@ public class DetailFragment extends Fragment {
         }
         @Override
         public void onLoadFinished(Loader<List<Trailer>> loader, List<Trailer> trailers) {
-            emptyTrailer.setText(R.string.empty_trailers);
+            emptyTrailer.setText(com.example.android.popularmovies.R.string.empty_trailers);
             trailerAdapter.clear();
             trailerProgress.setVisibility(View.GONE);
 

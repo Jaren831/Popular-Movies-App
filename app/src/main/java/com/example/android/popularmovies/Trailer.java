@@ -1,4 +1,4 @@
-package com.example.android.moviefragment;
+package com.example.android.popularmovies;
 
 /**
  * Created by Jaren Lynch on 12/2/2016.
