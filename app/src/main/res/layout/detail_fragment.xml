@@ -11,10 +11,12 @@
         android:id="@+id/detail_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:gravity="center"
         android:layout_marginTop="-8dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorAccent"
+        android:elevation="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +52,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_height="0dp"
-                android:text="@string/favorite"/>
+                android:text="@string/favorite"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="10dp"/>
         </LinearLayout>
     </LinearLayout>
     <TextView
@@ -63,8 +67,9 @@
         android:id="@+id/detail_plot"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="start"/>
+        android:layout_weight="2"
+        android:gravity="start"
+        android:ellipsize="end"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,8 +80,7 @@
         android:id="@+id/review_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:dividerHeight="1dp">
+        android:layout_weight="2">
     </ListView>
 
     <TextView
@@ -96,8 +100,7 @@
         android:id="@+id/trailer_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:dividerHeight="1dp">
+        android:layout_weight="2">
     </ListView>
     <TextView
         android:id="@+id/empty_trailer"
